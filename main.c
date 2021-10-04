@@ -21,67 +21,66 @@ ip_2= ip_2 * 256;
 ip_3= ip_3;
 ip_decimal = ip_0 + ip_1 + ip_2 + ip_3;
 FILE *fp;
-    char Ligne[MAXCHAR];
-    char *Sortie;
-
-    fp = fopen("geoip.csv","r");
-
-int first_member = 0;
+char Ligne[MAXCHAR];
+char *Sortie;
+fp = fopen("geoip.csv","r");
+int member = 0;
 int long ip_from = 0;
 int long ip_to = 0;
-    while (feof(fp) != true)
+while (feof(fp) != true)
     {
-        fgets(Ligne, MAXCHAR, fp);
+    fgets(Ligne, MAXCHAR, fp);
+    Sortie = strtok(Ligne, ",");
 
-        Sortie = strtok(Ligne, ",");
+    while(Sortie != NULL)
+        {
 
-        while(Sortie != NULL)
-        {   
-            if (first_member == 0)    // on passe dans ce if 2 fois par ligne et l'orsque l'on est sur le premier argument et 2eme argument de la ligne soit l'ip from et l'ip to
-            {int i = 1;
-                while (Sortie[i] != '"')
+        if (member == 0)    // on passe dans ce if 2 fois par ligne et l'orsque l'on est sur le premier argument et 2eme argument de la ligne soit l'ip from et l'ip to
+            {
+            int i = 1;
+
+            while (Sortie[i] != '"')
                 {
                 ip_from_convert[i-1]=Sortie[i];
                 i++;
                 }
             ip_from = atol(ip_from_convert);
             }
-            if(first_member == 1)
-            {int i = 1;
-                while (Sortie[i] != '"')
+
+        if(member == 1)
+            {
+            int i = 1;
+            while (Sortie[i] != '"')
                 {
                 ip_to_convert[i-1]=Sortie[i];
                 i++;
                 }
             ip_to = atol(ip_to_convert);
             }
-            if(first_member == 2)
-            {int i = 1;
-                while (Sortie[i] != '"')
+
+        if(member == 2)
+            {
+            int i = 1;
+            while (Sortie[i] != '"')
                 {
                 country_convert[i-1]=Sortie[i];
                 i++;
                 }
-
             }
-            Sortie = strtok(NULL, ",");
-        first_member ++;
+        Sortie = strtok(NULL, ",");
+        member ++;
         }
+
     if (ip_decimal >= ip_from && ip_decimal <= ip_to)
-    {
+        {
         printf("Le pays est : %s\n",country_convert);
         return 0;
-    }
-
+        }
     memset(ip_from_convert,0,99);
     memset(ip_to_convert,0,99);
     ip_from = 0;
     ip_to = 0;
-    first_member = 0;
+    member = 0;
     }
 return 0;
 }
-
-
-
-
