@@ -32,7 +32,6 @@ int long ip_to = 0;
     while (feof(fp) != true)
     {
         fgets(Ligne, MAXCHAR, fp);
-        printf("Ligne: %s", Ligne);
 
         Sortie = strtok(Ligne, ",");
 
@@ -42,25 +41,19 @@ int long ip_to = 0;
             {int i = 1;
                 while (Sortie[i] != '"')
                 {
-                printf("num : %d  char : %c \n",i,Sortie[i]);
                 ip_from_convert[i-1]=Sortie[i];
                 i++;
                 }
             ip_from = atol(ip_from_convert);
-            printf("ON EST LA \n");
-            printf("%s",argv[1]);
-            printf("\n %ld\n",ip_decimal);
             }
             if(first_member == 1)
             {int i = 1;
                 while (Sortie[i] != '"')
                 {
-                printf("num : %d  char : %c \n",i,Sortie[i]);
                 ip_to_convert[i-1]=Sortie[i];
                 i++;
                 }
             ip_to = atol(ip_to_convert);
-            printf("ON EST LA ENCORE \n");
             }
             if(first_member == 2)
             {int i = 1;
@@ -71,13 +64,9 @@ int long ip_to = 0;
                 }
 
             }
-            printf("Sortie: %s\n", Sortie);
             Sortie = strtok(NULL, ",");
         first_member ++;
         }
-    printf("L'ip doit etre comprise entre : %ld et : %ld \n",ip_from,ip_to);
-    printf("L'ip saisie est : %ld",ip_decimal);
-
     if (ip_decimal >= ip_from && ip_decimal <= ip_to)
     {
         printf("Le pays est : %s\n",country_convert);
