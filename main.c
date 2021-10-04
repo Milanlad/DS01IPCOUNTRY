@@ -15,12 +15,16 @@ long int ip_2 =0;
 long int ip_3 =0;
 long int ip_decimal = 0; // l'ip stocker sous un seul entier de 4 octets au lieu de 4 entier de 1 octets
 sscanf(argv[1],"%ld.%ld.%ld.%ld",&ip_0,&ip_1,&ip_2,&ip_3);
+if (ip_0<0 || ip_0 >255 || ip_1<0 || ip_1>255 || ip_2<0 || ip_2>255 || ip_3<0 || ip_3>255)
+{
+printf("Ip non valide valeur doivent etre comprise en 0 et 255 compris !!!\n");
+return 0 ;
+}                                            
 ip_0= ip_0 * 256 * 256 * 256;
 ip_1= ip_1 * 256 * 256;
 ip_2= ip_2 * 256;
 ip_3= ip_3;
 ip_decimal = ip_0 + ip_1 + ip_2 + ip_3;
-printf("\nAAAAAAAAAAAAAAAAAA : %ld\n",ip_decimal);
 FILE *fp;
 char Ligne[MAXCHAR];
 char *Sortie;
@@ -32,14 +36,11 @@ while (feof(fp) != true)
     {
     fgets(Ligne, MAXCHAR, fp);
     Sortie = strtok(Ligne, ",");
-
     while(Sortie != NULL)
         {
-
         if (member == 0)    // on passe dans ce if 2 fois par ligne et l'orsque l'on est sur le premier argument et 2eme argument de la ligne soit l'ip from et l'ip to
             {
             int i = 1;
-
             while (Sortie[i] != '"')
                 {
                 ip_from_convert[i-1]=Sortie[i];
@@ -47,7 +48,6 @@ while (feof(fp) != true)
                 }
             ip_from = atol(ip_from_convert);
             }
-
         if(member == 1)
             {
             int i = 1;
@@ -58,7 +58,6 @@ while (feof(fp) != true)
                 }
             ip_to = atol(ip_to_convert);
             }
-
         if(member == 2)
             {
             int i = 1;
@@ -71,7 +70,6 @@ while (feof(fp) != true)
         Sortie = strtok(NULL, ",");
         member ++;
         }
-
     if (ip_decimal >= ip_from && ip_decimal <= ip_to)
         {
         printf("Le pays est : %s\n",country_convert);
