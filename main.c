@@ -20,6 +20,7 @@ ip_1= ip_1 * 256 * 256;
 ip_2= ip_2 * 256;
 ip_3= ip_3;
 ip_decimal = ip_0 + ip_1 + ip_2 + ip_3;
+printf("\nAAAAAAAAAAAAAAAAAA : %ld\n",ip_decimal);
 FILE *fp;
 char Ligne[MAXCHAR];
 char *Sortie;
@@ -78,6 +79,7 @@ while (feof(fp) != true)
         }
     memset(ip_from_convert,0,99);
     memset(ip_to_convert,0,99);
+    memset(country_convert,0,99);
     ip_from = 0;
     ip_to = 0;
     member = 0;
