@@ -44,35 +44,29 @@ while (feof(fp) != true)
     int member = 0;
     fgets(Ligne, MAXCHAR, fp);
     Sortie = strtok(Ligne, ",");
-    while(Sortie != NULL || stop_at_third != 1 )
-        {int i = 1;
+    while(Sortie != NULL && stop_at_third != 1 )
+        {
         if (member == 0)    // on passe dans ce if 2 fois par ligne et l'orsque l'on est sur le premier argument et 2eme argument de la ligne soit l'ip from et l'ip to
             {
-             i = 1;
-            while (Sortie[i] != '"')
+            for (int i = 1;Sortie[i] != '"';i++)
                 {
                 ip_from_convert[i-1]=Sortie[i];
-                i++;
                 }
             ip_from = atol(ip_from_convert);
             }
         if(member == 1)
             {
-             i = 1;
-            while (Sortie[i] != '"')
+            for (int i = 1;Sortie[i] != '"';i++)
                 {
                 ip_to_convert[i-1]=Sortie[i];
-                i++;
                 }
             ip_to = atol(ip_to_convert);
             }
         if(member == 2)
             {
-             i = 1;
-            while (Sortie[i] != '"')
+            for (int i = 1;Sortie[i] != '"';i++)
                 {
                 country_convert[i-1]=Sortie[i];
-                i++;
                 }
             stop_at_third = 1;
             }
