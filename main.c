@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#define MAXCHAR 4096
+#define MAXCHAR 1024
 unsigned long duree;
 struct timeval debutCalcul, finCalcul;
 
